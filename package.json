@@ -13,7 +13,10 @@
     "test": "node --test",
     "check": "node scripts/check.js",
     "build": "node scripts/build.js",
-    "smoke": "node bin/connector-capability-matrix-skill.js --fixture fixtures/action-plan.json"
+    "smoke": "node bin/connector-capability-matrix-skill.js --fixture fixtures/action-plan.json",
+    "lint": "npm run check",
+    "package:smoke": "npm pack --dry-run",
+    "release:check": "npm run check && npm test && npm run smoke && npm run package:smoke"
   },
   "keywords": [
     "agent-skill",
@@ -22,5 +25,22 @@
     "dry-run"
   ],
   "author": "Roger Chappel",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogerchappel/connector-capability-matrix-skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rogerchappel/connector-capability-matrix-skill/issues"
+  },
+  "homepage": "https://github.com/rogerchappel/connector-capability-matrix-skill#readme",
+  "files": [
+    "bin",
+    "src",
+    "fixtures",
+    "scripts",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ]
 }
