@@ -1,0 +1,71 @@
+{
+  "capabilities": {
+    "crm": {
+      "grantedScopes": [
+        "contact:read",
+        "note:write"
+      ],
+      "operations": {
+        "readContact": {
+          "scopes": [
+            "contact:read"
+          ]
+        },
+        "addNote": {
+          "scopes": [
+            "note:write"
+          ],
+          "write": true,
+          "approval": "required"
+        },
+        "deleteContact": {
+          "scopes": [
+            "contact:delete"
+          ],
+          "write": true,
+          "approval": "required"
+        }
+      }
+    },
+    "slack": {
+      "grantedScopes": [
+        "channel:read"
+      ],
+      "operations": {
+        "postMessage": {
+          "scopes": [
+            "chat:write"
+          ],
+          "write": true,
+          "approval": "required"
+        }
+      }
+    }
+  },
+  "actions": [
+    {
+      "connector": "crm",
+      "operation": "readContact"
+    },
+    {
+      "connector": "crm",
+      "operation": "addNote",
+      "write": true
+    },
+    {
+      "connector": "crm",
+      "operation": "deleteContact",
+      "write": true
+    },
+    {
+      "connector": "slack",
+      "operation": "postMessage",
+      "write": true
+    },
+    {
+      "connector": "drive",
+      "operation": "upload",
+      "write": true
+    }
+  ]
+}
