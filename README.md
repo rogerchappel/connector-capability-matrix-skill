@@ -14,7 +14,11 @@ npm run smoke
 
 ```sh
 node bin/connector-capability-matrix-skill.js --fixture fixtures/action-plan.json
+node bin/connector-capability-matrix-skill.js --help
+node bin/connector-capability-matrix-skill.js --version
 ```
+
+The fixture smoke should report 2 allowed actions, 3 denied actions, and 3 actions that require approval.
 
 ## Library
 
