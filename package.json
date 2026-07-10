@@ -38,8 +38,12 @@
     "bin",
     "src",
     "fixtures",
+    "examples",
+    "docs",
     "scripts",
+    "SKILL.md",
     "README.md",
+    "docs/CHANGELOG.md",
     "LICENSE",
     "SECURITY.md"
   ]
