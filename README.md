@@ -5,9 +5,16 @@ Dry-run connector action plans against declared capabilities and approvals.
 ## Quickstart
 
 ```sh
+npm install
 npm test
 npm run check
 npm run smoke
+```
+
+For a published install, run the CLI with:
+
+```sh
+npx connector-capability-matrix-skill --help
 ```
 
 ## CLI
@@ -45,3 +52,8 @@ npm run smoke
 npm run package:smoke
 npm run release:check
 ```
+
+`npm run release:check` runs syntax checks, tests, the fixture-backed CLI smoke,
+and the package smoke script. The package allowlist includes the CLI, runtime
+source, fixtures, examples, docs, skill instructions, changelog, security policy,
+and license so the npm tarball stays runnable for local review.
