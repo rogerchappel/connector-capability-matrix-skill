@@ -56,4 +56,6 @@ npm run release:check
 `npm run release:check` runs syntax checks, tests, the fixture-backed CLI smoke,
 and the package smoke script. The package allowlist includes the CLI, runtime
 source, fixtures, examples, docs, skill instructions, changelog, security policy,
-and license so the npm tarball stays runnable for local review.
+and license so the npm tarball stays runnable for local review. The package
+smoke also imports the public API and verifies that the matrix evaluator and
+report formatter remain available to downstream tools.
