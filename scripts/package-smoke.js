@@ -29,4 +29,20 @@ if (missing.length) {
   throw new Error(`package smoke missing required files: ${missing.join(', ')}`);
 }
 
+const importSmoke = spawnSync(process.execPath, [
+  '--input-type=module',
+  '-e',
+  [
+    "import('./src/index.js').then((mod) => {",
+    "  if (typeof mod.evaluateCapabilityMatrix !== 'function') process.exit(1);",
+    "  if (typeof mod.formatMatrixReport !== 'function') process.exit(1);",
+    "});",
+  ].join(' '),
+], { encoding: 'utf8' });
+
+if (importSmoke.status !== 0) {
+  process.stderr.write(importSmoke.stderr);
+  throw new Error('package smoke failed: src/index.js did not expose the expected API');
+}
+
 console.log(`package smoke ok: ${pack.filename} (${pack.files.length} files)`);
