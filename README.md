@@ -31,6 +31,10 @@ The fixture smoke should report 2 allowed actions, 3 denied actions, and 3 actio
 
 Import from `src/index.js` or package exports once installed. The API is local-first and deterministic for fixture-driven review.
 
+## Action-plan schema
+
+The input contract is published as `connector-capability-matrix-skill/schemas/action-plan.schema.json` (package subpath `connector-capability-matrix-skill/schemas/action-plan.schema.json`). It uses JSON Schema Draft 2020-12 and documents the optional connector capability map and required action list. The repository test checks the package export and representative schema constraints.
+
 ## Limitations
 
 This project is a release-candidate MVP. It expects JSON input and does not call external services.

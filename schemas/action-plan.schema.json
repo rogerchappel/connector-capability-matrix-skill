@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rogerchappel/connector-capability-matrix-skill/blob/main/schemas/action-plan.schema.json",
+  "title": "Connector capability action plan",
+  "description": "Input accepted by evaluateCapabilityMatrix.",
+  "type": "object",
+  "properties": {
+    "capabilities": {
+      "type": "object",
+      "description": "Connector names mapped to granted scopes and supported operations.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "grantedScopes": { "type": "array", "items": { "type": "string" } },
+          "operations": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "scopes": { "type": "array", "items": { "type": "string" } },
+                "write": { "type": "boolean" },
+                "approval": { "enum": ["required"] }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "connector": { "type": "string", "minLength": 1 },
+          "operation": { "type": "string", "minLength": 1 },
+          "write": { "type": "boolean" }
+        },
+        "required": ["connector", "operation"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["actions"],
+  "additionalProperties": false
+}
