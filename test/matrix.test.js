@@ -19,3 +19,18 @@ test('denies unknown connectors', () => {
   const matrix = evaluateCapabilityMatrix({ capabilities, actions: [{ connector: 'drive', operation: 'upload' }] });
   assert.equal(matrix.denied[0].reasons[0], 'unknown connector');
 });
+test('denies unsupported operations', () => {
+  const matrix = evaluateCapabilityMatrix({ capabilities, actions: [{ connector: 'crm', operation: 'delete' }] });
+  assert.equal(matrix.denied.length, 1);
+  assert.equal(matrix.denied[0].reasons[0], 'unsupported operation');
+});
+test('treats omitted actions as an empty review', () => {
+  const matrix = evaluateCapabilityMatrix({ capabilities });
+  assert.deepEqual(matrix, { allowed: [], denied: [], approvals: [], results: [] });
+});
+test('marks operation-level writes for approval even when action omits write', () => {
+  const matrix = evaluateCapabilityMatrix({ capabilities, actions: [{ connector: 'crm', operation: 'note' }] });
+  assert.equal(matrix.allowed.length, 1);
+  assert.equal(matrix.approvals.length, 1);
+  assert.equal(matrix.results[0].approvalRequired, true);
+});
