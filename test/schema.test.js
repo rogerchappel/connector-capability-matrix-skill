@@ -14,3 +14,14 @@ test('package exports the action-plan JSON Schema and it describes representativ
   assert.deepEqual(schema.properties.actions.items.required, ['connector', 'operation']);
   assert.equal(schema.properties.capabilities.additionalProperties.properties.operations.additionalProperties.properties.write.type, 'boolean');
 });
+
+
+test('package exports the capability-manifest JSON Schema', async () => {
+  const exportPath = packageJson.exports['./schemas/capability-manifest.schema.json'];
+  assert.equal(exportPath, './schemas/capability-manifest.schema.json');
+  const schema = JSON.parse(await readFile(new URL(exportPath, pathToFileURL(resolve('package.json'))), 'utf8'));
+  assert.equal(schema.$schema, 'https://json-schema.org/draft/2020-12/schema');
+  assert.deepEqual(schema.required, ['capabilities']);
+  assert.equal(schema.properties.capabilities.additionalProperties.properties.grantedScopes.items.type, 'string');
+  assert.equal(schema.properties.capabilities.additionalProperties.properties.operations.additionalProperties.properties.approval.enum[0], 'required');
+});

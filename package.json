@@ -8,7 +8,8 @@
   },
   "exports": {
     ".": "./src/index.js",
-    "./schemas/action-plan.schema.json": "./schemas/action-plan.schema.json"
+    "./schemas/action-plan.schema.json": "./schemas/action-plan.schema.json",
+    "./schemas/capability-manifest.schema.json": "./schemas/capability-manifest.schema.json"
   },
   "scripts": {
     "test": "node --test",
