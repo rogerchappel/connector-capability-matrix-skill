@@ -33,10 +33,13 @@ const importSmoke = spawnSync(process.execPath, [
   '--input-type=module',
   '-e',
   [
-    "import('./src/index.js').then((mod) => {",
-    "  if (typeof mod.evaluateCapabilityMatrix !== 'function') process.exit(1);",
-    "  if (typeof mod.formatMatrixReport !== 'function') process.exit(1);",
-    "});",
+    "const [mod, schemaModule] = await Promise.all([",
+    "  import('./src/index.js'),",
+    "  import('connector-capability-matrix-skill/schemas/action-plan.schema.json', { with: { type: 'json' } }),",
+    "]);",
+    "if (typeof mod.evaluateCapabilityMatrix !== 'function') process.exit(1);",
+    "if (typeof mod.formatMatrixReport !== 'function') process.exit(1);",
+    "if (schemaModule.default.$schema !== 'https://json-schema.org/draft/2020-12/schema') process.exit(1);",
   ].join(' '),
 ], { encoding: 'utf8' });
 
