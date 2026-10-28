@@ -33,7 +33,17 @@ Import from `src/index.js` or package exports once installed. The API is local-f
 
 ## Action-plan schema
 
-The input contract is published as `connector-capability-matrix-skill/schemas/action-plan.schema.json` (package subpath `connector-capability-matrix-skill/schemas/action-plan.schema.json`). It uses JSON Schema Draft 2020-12 and documents the optional connector capability map and required action list. The repository test checks the package export and representative schema constraints.
+The input contract is published as `connector-capability-matrix-skill/schemas/action-plan.schema.json` (package subpath `connector-capability-matrix-skill/schemas/action-plan.schema.json`). It uses JSON Schema Draft 2020-12 and documents the optional connector capability map and required action list. The repository test checks the package export and representative schema constraints. A consumer can load the published schema directly from the package subpath:
+
+```js
+import actionPlanSchema from 'connector-capability-matrix-skill/schemas/action-plan.schema.json' with { type: 'json' };
+
+if (actionPlanSchema.$schema !== 'https://json-schema.org/draft/2020-12/schema') {
+  throw new Error('Unexpected action-plan schema version');
+}
+```
+
+This example uses Node.js JSON module imports; other validators can resolve the same exported subpath using their package resolver.
 
 ## Limitations
 
