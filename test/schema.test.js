@@ -5,6 +5,11 @@ import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import packageJson from '../package.json' with { type: 'json' };
 
+test('downstream consumers can import the action-plan JSON Schema package subpath', async () => {
+  const schemaModule = await import('connector-capability-matrix-skill/schemas/action-plan.schema.json', { with: { type: 'json' } });
+  assert.equal(schemaModule.default.$schema, 'https://json-schema.org/draft/2020-12/schema');
+});
+
 test('package exports the action-plan JSON Schema and it describes representative inputs', async () => {
   const exportPath = packageJson.exports['./schemas/action-plan.schema.json'];
   assert.equal(exportPath, './schemas/action-plan.schema.json');
